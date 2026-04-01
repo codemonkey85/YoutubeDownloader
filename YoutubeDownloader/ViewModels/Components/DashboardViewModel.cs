@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gress;
@@ -25,6 +26,7 @@ public partial class DashboardViewModel : ViewModelBase
     private readonly ViewModelManager _viewModelManager;
     private readonly SnackbarManager _snackbarManager;
     private readonly DialogManager _dialogManager;
+    private readonly LocalizationManager _localizationManager;
     private readonly SettingsService _settingsService;
 
     private readonly DisposableCollector _eventRoot = new();
@@ -42,6 +44,7 @@ public partial class DashboardViewModel : ViewModelBase
         _viewModelManager = viewModelManager;
         _snackbarManager = snackbarManager;
         _dialogManager = dialogManager;
+        _localizationManager = localizationManager;
         LocalizationManager = localizationManager;
         _settingsService = settingsService;
 
@@ -81,6 +84,61 @@ public partial class DashboardViewModel : ViewModelBase
     public partial string? Query { get; set; }
 
     public ObservableCollection<DownloadViewModel> Downloads { get; } = [];
+
+    private async Task EnsureFFmpegAsync()
+    {
+        // If a custom path is set, trust that the user knows what they're doing
+        if (_settingsService.FFmpegFilePath is not null)
+            return;
+
+        // If FFmpeg can be auto-detected, all good
+        if (FFmpeg.TryGetCliFilePath() is not null)
+            return;
+
+        // Otherwise, prompt the user to download FFmpeg
+        var dialog = _viewModelManager.CreateMessageBoxViewModel(
+            _localizationManager.FFmpegMissingTitle,
+            string.Format(_localizationManager.FFmpegMissingMessage, Program.Name),
+            _localizationManager.DownloadButton,
+            _localizationManager.CloseButton
+        );
+
+        if (await _dialogManager.ShowDialogAsync(dialog) != true)
+        {
+            if (Application.Current?.ApplicationLifetime?.TryShutdown(3) != true)
+                Environment.Exit(3);
+            return;
+        }
+
+        IsBusy = true;
+        var progress = _progressMuxer.CreateInput();
+        _snackbarManager.Notify(_localizationManager.FFmpegDownloadingTitle);
+
+        try
+        {
+            await FFmpeg.DownloadAsync(
+                Path.Combine(AppContext.BaseDirectory, FFmpeg.CliFileName),
+                progress
+            );
+        }
+        catch (Exception ex)
+        {
+            await _dialogManager.ShowDialogAsync(
+                _viewModelManager.CreateMessageBoxViewModel(
+                    _localizationManager.ErrorTitle,
+                    ex.Message
+                )
+            );
+        }
+        finally
+        {
+            progress.ReportCompletion();
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task InitializeAsync() => await EnsureFFmpegAsync();
 
     private bool CanShowAuthSetup() => !IsBusy;
 
