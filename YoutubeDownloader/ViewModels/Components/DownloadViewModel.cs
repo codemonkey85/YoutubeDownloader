@@ -39,7 +39,7 @@ public partial class DownloadViewModel : ViewModelBase
         _eventRoot.Add(
             Progress.WatchProperty(
                 o => o.Current,
-                () => OnPropertyChanged(nameof(IsProgressIndeterminate))
+                _ => OnPropertyChanged(nameof(IsProgressIndeterminate))
             )
         );
     }

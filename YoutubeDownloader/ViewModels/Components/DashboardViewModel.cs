@@ -53,7 +53,7 @@ public partial class DashboardViewModel : ViewModelBase
         _eventRoot.Add(
             _settingsService.WatchProperty(
                 o => o.ParallelLimit,
-                () => _downloadSemaphore.MaxCount = _settingsService.ParallelLimit,
+                v => _downloadSemaphore.MaxCount = v,
                 true
             )
         );
@@ -61,7 +61,7 @@ public partial class DashboardViewModel : ViewModelBase
         _eventRoot.Add(
             Progress.WatchProperty(
                 o => o.Current,
-                () => OnPropertyChanged(nameof(IsProgressIndeterminate))
+                _ => OnPropertyChanged(nameof(IsProgressIndeterminate))
             )
         );
     }
