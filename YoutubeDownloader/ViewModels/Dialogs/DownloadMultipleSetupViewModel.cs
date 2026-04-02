@@ -97,7 +97,7 @@ public partial class DownloadMultipleSetupViewModel(
             await File.WriteAllBytesAsync(filePath, []);
 
             downloads.Add(
-                viewModelManager.CreateDownloadViewModel(
+                viewModelManager.GetDownloadViewModel(
                     video,
                     new VideoDownloadPreference(SelectedContainer, SelectedVideoQualityPreference),
                     filePath

@@ -110,10 +110,7 @@ public partial class DownloadViewModel : ViewModelBase
         catch (Exception ex)
         {
             await _dialogManager.ShowDialogAsync(
-                _viewModelManager.CreateMessageBoxViewModel(
-                    LocalizationManager.ErrorTitle,
-                    ex.Message
-                )
+                _viewModelManager.GetMessageBoxViewModel(LocalizationManager.ErrorTitle, ex.Message)
             );
         }
     }
@@ -133,10 +130,7 @@ public partial class DownloadViewModel : ViewModelBase
         catch (Exception ex)
         {
             await _dialogManager.ShowDialogAsync(
-                _viewModelManager.CreateMessageBoxViewModel(
-                    LocalizationManager.ErrorTitle,
-                    ex.Message
-                )
+                _viewModelManager.GetMessageBoxViewModel(LocalizationManager.ErrorTitle, ex.Message)
             );
         }
     }

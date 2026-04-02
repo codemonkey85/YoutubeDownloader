@@ -96,7 +96,7 @@ public partial class DashboardViewModel : ViewModelBase
             return;
 
         // Otherwise, prompt the user to download FFmpeg
-        var dialog = _viewModelManager.CreateMessageBoxViewModel(
+        var dialog = _viewModelManager.GetMessageBoxViewModel(
             _localizationManager.FFmpegMissingTitle,
             string.Format(_localizationManager.FFmpegMissingMessage, Program.Name),
             _localizationManager.DownloadButton,
@@ -126,7 +126,7 @@ public partial class DashboardViewModel : ViewModelBase
         catch (Exception ex)
         {
             await _dialogManager.ShowDialogAsync(
-                _viewModelManager.CreateMessageBoxViewModel(
+                _viewModelManager.GetMessageBoxViewModel(
                     _localizationManager.ErrorTitle,
                     ex.Message
                 )
@@ -145,13 +145,13 @@ public partial class DashboardViewModel : ViewModelBase
 
     [RelayCommand(CanExecute = nameof(CanShowAuthSetup))]
     private async Task ShowAuthSetupAsync() =>
-        await _dialogManager.ShowDialogAsync(_viewModelManager.CreateAuthSetupViewModel());
+        await _dialogManager.ShowDialogAsync(_viewModelManager.GetAuthSetupViewModel());
 
     private bool CanShowSettings() => !IsBusy;
 
     [RelayCommand(CanExecute = nameof(CanShowSettings))]
     private async Task ShowSettingsAsync() =>
-        await _dialogManager.ShowDialogAsync(_viewModelManager.CreateSettingsViewModel());
+        await _dialogManager.ShowDialogAsync(_viewModelManager.GetSettingsViewModel());
 
     private async void EnqueueDownload(DownloadViewModel download, int position = 0)
     {
@@ -291,7 +291,7 @@ public partial class DashboardViewModel : ViewModelBase
                 );
 
                 var download = await _dialogManager.ShowDialogAsync(
-                    _viewModelManager.CreateDownloadSingleSetupViewModel(video, downloadOptions)
+                    _viewModelManager.GetDownloadSingleSetupViewModel(video, downloadOptions)
                 );
 
                 if (download is null)
@@ -305,7 +305,7 @@ public partial class DashboardViewModel : ViewModelBase
             else if (queryResult.Videos.Count > 1)
             {
                 var downloads = await _dialogManager.ShowDialogAsync(
-                    _viewModelManager.CreateDownloadMultipleSetupViewModel(
+                    _viewModelManager.GetDownloadMultipleSetupViewModel(
                         queryResult.Title,
                         queryResult.Videos,
                         // Pre-select videos if they come from a single query and not from search
@@ -327,7 +327,7 @@ public partial class DashboardViewModel : ViewModelBase
             else
             {
                 await _dialogManager.ShowDialogAsync(
-                    _viewModelManager.CreateMessageBoxViewModel(
+                    _viewModelManager.GetMessageBoxViewModel(
                         LocalizationManager.NothingFoundTitle,
                         LocalizationManager.NothingFoundMessage
                     )
@@ -337,7 +337,7 @@ public partial class DashboardViewModel : ViewModelBase
         catch (Exception ex)
         {
             await _dialogManager.ShowDialogAsync(
-                _viewModelManager.CreateMessageBoxViewModel(
+                _viewModelManager.GetMessageBoxViewModel(
                     LocalizationManager.ErrorTitle,
                     // Short error message for YouTube-related errors, full for others
                     ex is YoutubeExplodeException
@@ -392,12 +392,12 @@ public partial class DashboardViewModel : ViewModelBase
         RemoveDownload(download);
 
         var newDownload = download.DownloadOption is not null
-            ? _viewModelManager.CreateDownloadViewModel(
+            ? _viewModelManager.GetDownloadViewModel(
                 download.Video!,
                 download.DownloadOption,
                 download.FilePath!
             )
-            : _viewModelManager.CreateDownloadViewModel(
+            : _viewModelManager.GetDownloadViewModel(
                 download.Video!,
                 download.DownloadPreference!,
                 download.FilePath!

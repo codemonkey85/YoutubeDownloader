@@ -77,6 +77,6 @@ public partial class DownloadSingleSetupViewModel(
 
         settingsService.LastContainer = container;
 
-        Close(viewModelManager.CreateDownloadViewModel(Video, SelectedDownloadOption, filePath));
+        Close(viewModelManager.GetDownloadViewModel(Video, SelectedDownloadOption, filePath));
     }
 }
