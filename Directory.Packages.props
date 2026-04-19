@@ -2,6 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageVersion Include="AsyncImageLoader.Avalonia" Version="3.7.0" />
     <PackageVersion Include="Avalonia" Version="11.3.14" />
