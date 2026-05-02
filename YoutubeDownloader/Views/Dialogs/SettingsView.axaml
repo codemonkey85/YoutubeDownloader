@@ -92,9 +92,9 @@
                             Height="20"
                             DockPanel.Dock="Right"
                             FontSize="13"
+                            PlaceholderText="{Binding LocalizationManager.FFmpegPathPlaceholderText}"
                             Text="{Binding FFmpegFilePath}"
-                            Theme="{DynamicResource CompactTextBox}"
-                            Watermark="{Binding LocalizationManager.FFmpegPathWatermark}">
+                            Theme="{DynamicResource CompactTextBox}">
                             <TextBox.InnerRightContent>
                                 <StackPanel Orientation="Horizontal">
                                     <Button

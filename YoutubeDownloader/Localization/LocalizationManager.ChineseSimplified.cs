@@ -8,7 +8,7 @@ public partial class LocalizationManager
         new Dictionary<string, string>
         {
             // Dashboard
-            [nameof(QueryWatermark)] = "粘贴链接或搜索",
+            [nameof(QueryPlaceholderText)] = "粘贴链接或搜索",
             [nameof(QueryTooltip)] =
                 "接受任何有效的 YouTube 网页链接或视频 ID。在开头添加问号 (?) 可进行文本搜索。",
             [nameof(ProcessQueryTooltip)] = "开始查询 (Enter)",
@@ -73,7 +73,7 @@ public partial class LocalizationManager
             [nameof(ParallelLimitTooltip)] = "允许同时进行的下载任务数量",
             [nameof(FFmpegPathLabel)] = "FFmpeg 路径",
             [nameof(FFmpegPathTooltip)] = "FFmpeg 可执行文件的路径。留空则使用自动检测。",
-            [nameof(FFmpegPathWatermark)] = "自动检测",
+            [nameof(FFmpegPathPlaceholderText)] = "自动检测",
             [nameof(FFmpegPathResetTooltip)] = "重置为自动检测",
             [nameof(FFmpegPathBrowseTooltip)] = "浏览 FFmpeg 可执行文件",
             // Auth Setup

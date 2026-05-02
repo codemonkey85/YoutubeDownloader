@@ -80,7 +80,7 @@ public partial class LocalizationManager
 {
     // ---- Dashboard ----
 
-    public string QueryWatermark => Get();
+    public string QueryPlaceholderText => Get();
     public string QueryTooltip => Get();
     public string ProcessQueryTooltip => Get();
     public string AuthTooltip => Get();
@@ -127,7 +127,7 @@ public partial class LocalizationManager
     public string ParallelLimitTooltip => Get();
     public string FFmpegPathLabel => Get();
     public string FFmpegPathTooltip => Get();
-    public string FFmpegPathWatermark => Get();
+    public string FFmpegPathPlaceholderText => Get();
     public string FFmpegPathResetTooltip => Get();
     public string FFmpegPathBrowseTooltip => Get();
 

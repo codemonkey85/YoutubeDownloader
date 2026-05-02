@@ -8,7 +8,7 @@ public partial class LocalizationManager
         new Dictionary<string, string>
         {
             // Dashboard
-            [nameof(QueryWatermark)] = "URL or search query",
+            [nameof(QueryPlaceholderText)] = "URL or search query",
             [nameof(QueryTooltip)] =
                 "Any valid YouTube URL or ID is accepted. Prepend a question mark (?) to perform search by text.",
             [nameof(ProcessQueryTooltip)] = "Process query (Enter)",
@@ -75,7 +75,7 @@ public partial class LocalizationManager
             [nameof(FFmpegPathLabel)] = "FFmpeg path",
             [nameof(FFmpegPathTooltip)] =
                 "Path to the FFmpeg executable. Leave empty to use auto-detection.",
-            [nameof(FFmpegPathWatermark)] = "Auto-detect",
+            [nameof(FFmpegPathPlaceholderText)] = "Auto-detect",
             [nameof(FFmpegPathResetTooltip)] = "Reset to auto-detection",
             [nameof(FFmpegPathBrowseTooltip)] = "Browse for FFmpeg executable",
             // Auth Setup

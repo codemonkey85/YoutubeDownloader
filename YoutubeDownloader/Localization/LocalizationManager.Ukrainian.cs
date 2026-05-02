@@ -8,7 +8,7 @@ public partial class LocalizationManager
         new Dictionary<string, string>
         {
             // Dashboard
-            [nameof(QueryWatermark)] = "URL або пошуковий запит",
+            [nameof(QueryPlaceholderText)] = "URL або пошуковий запит",
             [nameof(QueryTooltip)] =
                 "Приймається будь-який дійсний URL або ID YouTube. Додайте знак питання (?) для пошуку за текстом.",
             [nameof(ProcessQueryTooltip)] = "Виконати запит (Enter)",
@@ -75,7 +75,7 @@ public partial class LocalizationManager
             [nameof(FFmpegPathLabel)] = "Шлях FFmpeg",
             [nameof(FFmpegPathTooltip)] =
                 "Шлях до виконуваного файлу FFmpeg. Залиште порожнім для автоматичного визначення.",
-            [nameof(FFmpegPathWatermark)] = "Авто",
+            [nameof(FFmpegPathPlaceholderText)] = "Авто",
             [nameof(FFmpegPathResetTooltip)] = "Скинути до автоматичного визначення",
             [nameof(FFmpegPathBrowseTooltip)] = "Вибрати файл FFmpeg",
             // Auth Setup

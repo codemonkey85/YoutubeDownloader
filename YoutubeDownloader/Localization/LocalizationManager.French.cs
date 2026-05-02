@@ -10,7 +10,7 @@ public partial class LocalizationManager
     >
     {
         // Dashboard
-        [nameof(QueryWatermark)] = "URL ou requête de recherche",
+        [nameof(QueryPlaceholderText)] = "URL ou requête de recherche",
         [nameof(QueryTooltip)] =
             "Toute URL ou ID YouTube valide est acceptée. Ajoutez un point d'interrogation (?) pour rechercher par texte.",
         [nameof(ProcessQueryTooltip)] = "Traiter la requête (Entrée)",
@@ -79,7 +79,7 @@ public partial class LocalizationManager
         [nameof(FFmpegPathLabel)] = "Chemin FFmpeg",
         [nameof(FFmpegPathTooltip)] =
             "Chemin vers l'exécutable FFmpeg. Laisser vide pour la détection automatique.",
-        [nameof(FFmpegPathWatermark)] = "Auto",
+        [nameof(FFmpegPathPlaceholderText)] = "Auto",
         [nameof(FFmpegPathResetTooltip)] = "Réinitialiser la détection automatique",
         [nameof(FFmpegPathBrowseTooltip)] = "Parcourir l'exécutable FFmpeg",
         // Auth Setup
